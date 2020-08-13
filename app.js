@@ -1,23 +1,24 @@
-const express = require('express');
-const port = process.env.PORT || 3000;
 
-const app = express()
+const path = require('path');
+const pathObj = path.parse(__filename);
 
-const generateTitle = () => 'NodeJS 2020'
 
-app.set('view engine', 'hbs');
-app.get('/', (req, res) => {
+const os = require('os');
+const totalMem = os.totalmem()
+const freeMem = os.freemem()
 
-  const title = generateTitle();
-
-  res.render('index', {
-    pageTitle: title,
-    pageBody: 'Hello Node-World!'
-  })
+const fs = require('fs');
+const files = fs.readdir('./', (err, files)=>{
+  // if(err) console.log(err);
+  // else console.log('Files', files)
 })
 
-app.get('/about', (req, res) => {
-  res.send('About me :)')
-})
+const EventEmitter = require('events');
 
-app.listen(port)
+const Logger = require('./utils');
+const logger = new Logger()
+
+logger.addListener('messageLogged', (arg)=>console.log('Listener called', arg))
+
+
+logger.logg('Beniz')
