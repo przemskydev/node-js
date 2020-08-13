@@ -1,13 +1,17 @@
 const express = require('express');
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const app = express()
 
-app.set('view engine', 'hbs');
+const generateTitle = () => 'NodeJS 2020'
 
+app.set('view engine', 'hbs');
 app.get('/', (req, res) => {
+
+  const title = generateTitle();
+
   res.render('index', {
-    pageTitle: 'NodeJS',
+    pageTitle: title,
     pageBody: 'Hello Node-World!'
   })
 })
