@@ -1,16 +1,19 @@
-const http = require('http');
+const express = require('express');
 const port = 3000;
-const handler = (request, response) => {
-  console.log('New user!')
-  response.end('Hello node!!')
-}
 
-const server = http.createServer(handler);
+const app = express()
 
-server.listen(port, (err) => {
-  if(err){
-    return console.log('Some error')
-  }
+app.set('view engine', 'hbs');
 
-  console.log('Server is running...')
-});
+app.get('/', (req, res) => {
+  res.render('index', {
+    pageTitle: 'NodeJS',
+    pageBody: 'Hello Node-World!'
+  })
+})
+
+app.get('/about', (req, res) => {
+  res.send('About me :)')
+})
+
+app.listen(port)
