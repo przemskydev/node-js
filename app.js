@@ -1,19 +1,12 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
-const server = http.createServer((req, res)=>{
-  if(req.url === '/'){
-    res.write('Hello Node!')
-    res.end()
-  }
-
-  if(req.url === '/api/course'){
-    res.write(JSON.stringify([1,2,3,4]))
-    res.end()
-  }
+app.get('/', (req, res)=>{
+  res.send('Hello Node-World!')
 });
 
-// server.on('connection', socket=>console.log('New connection.'))
+app.get('/api/courses', (req, res)=>{
+  res.send([1,2,3,4,5]);
+})
 
-server.listen(3000);
-
-console.log('Listening on 3000...')
+app.listen(3000, ()=> console.log('Listening on 3000...'))
