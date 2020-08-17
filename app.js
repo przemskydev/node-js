@@ -1,24 +1,19 @@
+const http = require('http');
 
-const path = require('path');
-const pathObj = path.parse(__filename);
+const server = http.createServer((req, res)=>{
+  if(req.url === '/'){
+    res.write('Hello Node!')
+    res.end()
+  }
 
+  if(req.url === '/api/course'){
+    res.write(JSON.stringify([1,2,3,4]))
+    res.end()
+  }
+});
 
-const os = require('os');
-const totalMem = os.totalmem()
-const freeMem = os.freemem()
+// server.on('connection', socket=>console.log('New connection.'))
 
-const fs = require('fs');
-const files = fs.readdir('./', (err, files)=>{
-  // if(err) console.log(err);
-  // else console.log('Files', files)
-})
+server.listen(3000);
 
-const EventEmitter = require('events');
-
-const Logger = require('./utils');
-const logger = new Logger()
-
-logger.addListener('messageLogged', (arg)=>console.log('Listener called', arg))
-
-
-logger.logg('Beniz')
+console.log('Listening on 3000...')
