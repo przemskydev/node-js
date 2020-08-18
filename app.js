@@ -1,9 +1,20 @@
 const Joi = require('@hapi/joi');
 
 const express = require('express');
+const helmet = require("helmet");
+const morgan = require("morgan")
+
 const app = express();
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
+app.use(helmet())
+app.use(morgan('tiny'))
+app.use((req, res, next) => {
+  console.log(`Logged...`);
+  next();
+})
 
 function validateCourse(course) {
   const schema = Joi.object({
@@ -41,7 +52,7 @@ app.post('/api/courses', (req, res) => {
   res.send(course)
 })
 
-app.put('/api/courses/:id', (req,res)=>{
+app.put('/api/courses/:id', (req, res) => {
   const course = courses.find(course => course.id === parseInt(req.params.id))
   if (!course) return res.status(404).send('The course with the given ID was not found')
 
@@ -54,7 +65,7 @@ app.put('/api/courses/:id', (req,res)=>{
 
 })
 
-app.delete('/api/courses/:id', (req,res)=>{
+app.delete('/api/courses/:id', (req, res) => {
   const course = courses.find(course => course.id === parseInt(req.params.id))
   if (!course) return res.status(404).send('The course with the given ID was not found')
 

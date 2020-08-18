@@ -11,6 +11,8 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "express": "^4.17.1",
-    "hbs": "^4.1.1"
+    "hbs": "^4.1.1",
+    "helmet": "^4.1.0",
+    "morgan": "^1.10.0"
   }
 }
