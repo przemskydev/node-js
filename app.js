@@ -31,5 +31,5 @@ const findUsers = async () => {
   }
 }
 
-// createUser({ name: 'Bilbo', age: 111 })
-findUsers()
+createUser({ name: 'Gandalf', age: 150 })
+// findUsers()
