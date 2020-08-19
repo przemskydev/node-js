@@ -9,17 +9,17 @@ MongoClient.connect(url, {}, (error, client) => {
   if (error) console.log(`Some error check connection...`);
 
   const db = client.db(dbName);
-  const id = new ObjectID()
+  // const id = new ObjectID()
   // console.log(id.toHexString())
-  db.collection('users').insertOne({
-    _id: id,
-    name: 'Dan',
-    age: 23
-  }, (error, result)=>{
-    if(error) console.log(`Adding user error.`, error);
+  // db.collection('users').insertOne({
+  //   _id: id,
+  //   name: 'Dan',
+  //   age: 23
+  // }, (error, result)=>{
+  //   if(error) console.log(`Adding user error.`, error);
 
-    console.log(result.ops)
-  })
+  //   console.log(result.ops)
+  // })
 
   // db.collection('users').find({
   //   age: { $gt: 35}
@@ -42,7 +42,7 @@ MongoClient.connect(url, {}, (error, client) => {
   //   age: 32
   // }, (error, result)=>console.log(result))
 
-  db.collection('users').find({}).toArray((error, result) => console.log(result))
+  db.collection('users').findOne({ _id: new ObjectID('5f3cfa99ee246617fc54a39b')}, (error, result) => console.log(result))
 
   console.log(`Database connection success.`);
 })
