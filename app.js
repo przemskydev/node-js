@@ -6,6 +6,8 @@ require('dotenv/config')
 const app = express();
 const DB_URI = process.env.DB_CONNECTION;
 
+app.use(express.json())
+
 const postsRoute = require('./routes/posts.route');
 app.use('/posts', postsRoute);
 
