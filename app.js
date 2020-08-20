@@ -6,11 +6,16 @@ require('dotenv/config')
 const app = express();
 const DB_URI = process.env.DB_CONNECTION;
 
+//Middlewares
 app.use(express.json())
 
+//Import routes
 const postsRoute = require('./routes/posts.route');
-app.use('/posts', postsRoute);
+const authRoute = require('./routes/auth.route')
 
+//Routes middlewares
+app.use('/posts', postsRoute);
+app.use('/api/user', authRoute)
 
 //Routes
 app.get('/', (req, res) => res.send('Hello World!'))
