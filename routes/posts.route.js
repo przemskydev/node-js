@@ -10,6 +10,9 @@ router.post('/', (req, res) => {
     desc: req.body.desc
   })
 
+  post.save()
+    .then(data => res.json(data))
+    .catch(error => console.log(error))
 })
 
 
