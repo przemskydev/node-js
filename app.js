@@ -6,10 +6,12 @@ require('dotenv/config')
 const app = express();
 const DB_URI = process.env.DB_CONNECTION;
 
+const postsRoute = require('./routes/posts.route');
+app.use('/posts', postsRoute);
+
+
 //Routes
 app.get('/', (req, res) => res.send('Hello World!'))
-
-app.get('/posts', (req, res) => res.send('Posts site'))
 
 
 //connect to db
