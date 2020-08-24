@@ -1,23 +1,31 @@
 const express = require('express');
 const port = process.env.PORT || 3000;
+const mongoose = require('mongoose');
+require('dotenv/config')
 
-const app = express()
+const app = express();
+const DB_URI = process.env.DB_CONNECTION;
 
-const generateTitle = () => 'NodeJS 2020'
+//Middlewares
+app.use(express.json())
 
-app.set('view engine', 'hbs');
-app.get('/', (req, res) => {
+//Import routes
+const postsRoute = require('./routes/posts.route');
+const authRoute = require('./routes/auth.route')
+const privatePost = require('./PrivateRoute/post')
 
-  const title = generateTitle();
+//Routes middlewares
+app.use('/posts', postsRoute);
+app.use('/api/user', authRoute)
+app.use('/api/post', privatePost)
 
-  res.render('index', {
-    pageTitle: title,
-    pageBody: 'Hello Node-World!'
-  })
-})
+//Routes
+app.get('/', (req, res) => res.send('Hello World!'))
 
-app.get('/about', (req, res) => {
-  res.send('About me :)')
+
+//connect to db
+mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
+  if (!error) console.log(`Connection successful...`)
 })
 
 app.listen(port)
