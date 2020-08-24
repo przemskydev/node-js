@@ -12,10 +12,12 @@ app.use(express.json())
 //Import routes
 const postsRoute = require('./routes/posts.route');
 const authRoute = require('./routes/auth.route')
+const privatePost = require('./PrivateRoute/post')
 
 //Routes middlewares
 app.use('/posts', postsRoute);
 app.use('/api/user', authRoute)
+app.use('/api/post', privatePost)
 
 //Routes
 app.get('/', (req, res) => res.send('Hello World!'))
